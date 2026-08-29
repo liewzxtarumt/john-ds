@@ -180,6 +180,7 @@ h1, h2, h3 {
     font-weight: 500;
     line-height: 1.4;
     margin: 0;
+    padding-left: 22px;
     text-align: left;
 }
 
