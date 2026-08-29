@@ -3101,13 +3101,13 @@ with tab_predict:
 with tab_about:
 
     st.subheader("ℹ️ About the Project")
-    st.caption("Telco Customer Churn Prediction & Analysis System")
+    st.caption("Telcom Customer Churn Prediction & Analysis System")
 
     # 1. High-Level Summary Cards
     st.markdown("### 📌 Executive Overview")
     
     m1, m2, m3 = st.columns(3)
-    m1.metric("Project Name", "Telco Customer Churn")
+    m1.metric("Project Name", "Telcom Customer Churn")
     m2.metric("Dataset Size", "7,043 Records")
     m3.metric("Total Features", "21 Attributes")
 
