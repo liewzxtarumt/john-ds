@@ -3176,35 +3176,39 @@ with tab_about:
             """
         )
 
-st.markdown(
-    """
-    <div style="
-        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
-        border: 1px solid #b3d4fc;
-        border-left: 5px solid #1e88e5;
-        padding: 14px 20px 16px 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    ">
-        <h4 style="color: #0d47a1; margin-top: 0; margin-bottom: 6px; font-size: 1.05rem;">🤖 Machine Learning Models</h4>
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: flex-start;">
-            <div style="flex: 1; min-width: 180px;">
-                <strong style="color: #1565c0; font-size: 0.95rem;">1. Logistic Regression</strong><br>
-                <span style="font-size: 0.85em; color: #5c6bc0;">Linear baseline model</span>
-            </div>
-            <div style="flex: 1; min-width: 180px;">
-                <strong style="color: #2e7d32; font-size: 0.95rem;">2. Random Forest ⭐</strong><br>
-                <span style="font-size: 0.85em; color: #2e7d32; font-weight: 500;">Best performing ensemble model</span>
-            </div>
-            <div style="flex: 1; min-width: 180px;">
-                <strong style="color: #1565c0; font-size: 0.95rem;">3. Support Vector Machine</strong><br>
-                <span style="font-size: 0.85em; color: #5c6bc0;">Non-linear kernel classification</span>
+    st.divider()
+
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+            border: 1px solid #b3d4fc;
+            border-left: 5px solid #1e88e5;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
+        ">
+            <h4 style="color: #0d47a1; margin-top: 0; margin-bottom: 12px;">🤖 Machine Learning Models</h4>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #1565c0;">1. Logistic Regression</strong><br>
+                    <span style="font-size: 0.88em; color: #5c6bc0;">Linear baseline model</span>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #2e7d32;">2. Random Forest ⭐</strong><br>
+                    <span style="font-size: 0.88em; color: #2e7d32; font-weight: 500;">Best performing ensemble model</span>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #1565c0;">3. Support Vector Machine</strong><br>
+                    <span style="font-size: 0.88em; color: #5c6bc0;">Non-linear kernel classification</span>
+                </div>
             </div>
         </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True
+    )
+
 
     st.divider()
     
