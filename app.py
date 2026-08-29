@@ -3100,7 +3100,7 @@ with tab_predict:
 
 with tab_about:
 
-    st.subheader("ℹ️ Telco Customer Churn Prediction")
+    st.subheader("ℹ️ Telcom Customer Churn Prediction")
 
     st.markdown("""
     **Purpose:**  
