@@ -1143,9 +1143,9 @@ st.sidebar.markdown(
 
 tab_overview, tab_eda, tab_model, tab_predict = st.tabs([
     "Overview",
-    "Exploratory Data Analysis",
-    "Modelling & Evaluation",
-    "Predict a Customer",
+    "Data Exploratory",
+    "Model Performance",
+    "Predict",
 ])
 
 
@@ -2947,4 +2947,3 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
-
