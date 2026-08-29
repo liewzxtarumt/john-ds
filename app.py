@@ -3101,13 +3101,13 @@ with tab_predict:
 with tab_about:
 
     st.subheader("ℹ️ About the Project")
-    st.caption("Telco Customer Churn Prediction & Analysis System")
+    st.caption("Telcom Customer Churn Prediction & Analysis System")
 
     # 1. High-Level Summary Cards
     st.markdown("### 📌 Executive Overview")
     
     m1, m2, m3 = st.columns(3)
-    m1.metric("Project Name", "Telco Customer Churn")
+    m1.metric("Project Name", "Telcom Customer Churn")
     m2.metric("Dataset Size", "7,043 Records")
     m3.metric("Total Features", "21 Attributes")
 
@@ -3131,28 +3131,13 @@ with tab_about:
             "Focusing retention offers on new users and incentivizing long-term contracts will yield the highest ROI."
         )
 
-    st.divider()
-
-    # 3. Best Model Performance Card
-    st.markdown("### 🏆 Best Model Performance (Random Forest)")
-    
-    k1, k2, k3, k4, k5, k6 = st.columns(6)
-    k1.metric("Training Acc.", "84.35%")
-    k2.metric("Test Acc.", "80.55%")
-    k3.metric("Precision", "67.12%")
-    k4.metric("Recall", "52.41%")
-    k5.metric("F1-score", "58.86%")
-    k6.metric("AUC", "84.38%")
-
-    st.divider()
-
-    # 4. Pipeline & Technical Details
+# 4. Pipeline & Technical Details
     st.markdown("### 🛠️ Technical Pipeline & Methodology")
 
     t1, t2, t3 = st.columns(3)
 
     with t1:
-        st.markdown("#### 1. Data Preparation")
+        st.markdown("#### Data Preparation")
         st.markdown(
             """
             * **Data Cleaning:** Handling raw dataset noise
@@ -3165,20 +3150,7 @@ with tab_about:
         )
 
     with t2:
-        st.markdown("#### 2. Machine Learning Models")
-        st.markdown(
-            """
-            1. **Logistic Regression**  
-               *(Linear baseline model)*
-            2. **Random Forest**  
-               *(Best performing ensemble model)*
-            3. **Support Vector Machine (SVM)**  
-               *(Non-linear kernel classification)*
-            """
-        )
-
-    with t3:
-        st.markdown("#### 3. Evaluation Metrics")
+        st.markdown("#### Evaluation Metrics")
         st.markdown(
             """
             * **Accuracy:** Overall correct predictions ratio
@@ -3186,5 +3158,18 @@ with tab_about:
             * **Recall:** True churners successfully captured
             * **F1-score:** Balance between Precision & Recall
             * **AUC:** Multi-threshold separation power
+            """
+        )
+
+    with t3:
+        st.markdown("#### Machine Learning Models")
+        st.markdown(
+            """
+            * **Logistic Regression**  
+              *(Linear baseline model)*
+            * **Random Forest**  
+              *(Best performing ensemble model)*
+            * **Support Vector Machine (SVM)**  
+              *(Non-linear kernel classification)*
             """
         )
