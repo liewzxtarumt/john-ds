@@ -3100,49 +3100,91 @@ with tab_predict:
 
 with tab_about:
 
-    st.subheader("ℹ️ Telcom Customer Churn Prediction")
+    st.subheader("ℹ️ About the Project")
+    st.caption("Telco Customer Churn Prediction & Analysis System")
 
-    st.markdown("""
-    **Purpose:**  
-    Analyse customer churn and identify customers who are likely to leave.
+    # 1. High-Level Summary Cards
+    st.markdown("### 📌 Executive Overview")
+    
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Project Name", "Telco Customer Churn")
+    m2.metric("Dataset Size", "7,043 Records")
+    m3.metric("Total Features", "21 Attributes")
 
-    **Dataset:**  
-    7,043 customer records and 21 attributes.
+    st.divider()
 
-    **Data Analysis:**  
-    Explore customer characteristics, contracts, charges, services, and churn patterns.
+    # 2. Project Scope & Purpose
+    c1, c2 = st.columns(2)
+    
+    with c1:
+        st.markdown("#### 🎯 Core Purpose & Business Goal")
+        st.info(
+            "**Primary Goal:** Analyse customer churn patterns and identify customers who are highly likely to leave.\n\n"
+            "**Business Value:** Helps the telecommunications company identify high-risk customers early and take proactive retention actions to minimize revenue loss."
+        )
 
-    **Data Preparation:**  
-    * Data cleaning  
-    * Missing-value handling  
-    * Categorical encoding  
-    * Outlier detection  
-    * Data partitioning  
-    * Feature scaling  
+    with c2:
+        st.markdown("#### 💡 Key Business Finding")
+        st.warning(
+            "**Primary Churn Driver:**\n\n"
+            "Customer churn is particularly associated with **shorter tenure** and **month-to-month contracts**. "
+            "Focusing retention offers on new users and incentivizing long-term contracts will yield the highest ROI."
+        )
 
-    **Machine Learning Models:**  
-    1. Logistic Regression  
-    2. Random Forest  
-    3. Support Vector Machine (SVM)  
+    st.divider()
 
-    **Model Evaluation:**  
-    * **Accuracy** - Measures the proportion of customers that the model correctly classifies as churn or non-churn.  
-    * **Precision** - Measures how many customers predicted to churn actually churned.  
-    * **Recall** - Measures how many actual churn customers were correctly identified by the model.  
-    * **F1-score** - Measures the balance between Precision and Recall, especially useful when the dataset has class imbalance.  
-    * **Area Under Graph (AUC)** - Measures how well the model distinguishes between churn and non-churn customers across different classification thresholds.  
+    # 3. Best Model Performance Card
+    st.markdown("### 🏆 Best Model Performance (Random Forest)")
+    
+    k1, k2, k3, k4, k5, k6 = st.columns(6)
+    k1.metric("Training Acc.", "84.35%")
+    k2.metric("Test Acc.", "80.55%")
+    k3.metric("Precision", "67.12%")
+    k4.metric("Recall", "52.41%")
+    k5.metric("F1-score", "58.86%")
+    k6.metric("AUC", "84.38%")
 
-    **Best Model: Random Forest**  
-    * Training Accuracy: 84.35%  
-    * Test Accuracy: 80.55%  
-    * Precision: 67.12%  
-    * Recall: 52.41%  
-    * F1-score: 58.86%  
-    * AUC: 84.38%  
+    st.divider()
 
-    **Key Finding:**  
-    Churn is particularly associated with shorter tenure and month-to-month contracts.  
+    # 4. Pipeline & Technical Details
+    st.markdown("### 🛠️ Technical Pipeline & Methodology")
 
-    **Business Purpose:**  
-    Help the telecommunications company identify high-risk customers early and take proactive retention actions.
-    """)
+    t1, t2, t3 = st.columns(3)
+
+    with t1:
+        st.markdown("#### 1. Data Preparation")
+        st.markdown(
+            """
+            * **Data Cleaning:** Handling raw dataset noise
+            * **Missing Values:** Imputing missing `TotalCharges`
+            * **Encoding:** Mapping binary & one-hot encoding
+            * **Outlier Detection:** IQR fence inspection
+            * **Partitioning:** Stratified 80/20 train/test split
+            * **Scaling:** `StandardScaler` for continuous features
+            """
+        )
+
+    with t2:
+        st.markdown("#### 2. Machine Learning Models")
+        st.markdown(
+            """
+            1. **Logistic Regression**  
+               *(Linear baseline model)*
+            2. **Random Forest**  
+               *(Best performing ensemble model)*
+            3. **Support Vector Machine (SVM)**  
+               *(Non-linear kernel classification)*
+            """
+        )
+
+    with t3:
+        st.markdown("#### 3. Evaluation Metrics")
+        st.markdown(
+            """
+            * **Accuracy:** Overall correct predictions ratio
+            * **Precision:** True churners out of predicted churns
+            * **Recall:** True churners successfully captured
+            * **F1-score:** Balance between Precision & Recall
+            * **AUC:** Multi-threshold separation power
+            """
+        )
