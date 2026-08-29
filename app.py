@@ -3163,7 +3163,8 @@ with tab_about:
             * **Scaling:** `StandardScaler` for continuous features
             """
         )
-        
+
+    col_left, col_right = st.columns([1.8, 1], gap="large")
         st.divider()
 
         st.markdown("#### Evaluation Metrics")
