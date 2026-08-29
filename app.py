@@ -868,42 +868,6 @@ def evaluate_models(
             )[:, 1]
         )
 
-        test_acc = accuracy_score(
-            y_test,
-            test_pred,
-        ) * 100
-
-        prec = precision_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        rec = recall_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        f1 = f1_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        auc = roc_auc_score(
-            y_test,
-            test_proba,
-        ) * 100
-
-        avg_score = np.mean([
-            test_acc,
-            prec,
-            rec,
-            f1,
-            auc,
-        ])
-
         rows.append({
 
             "Model":
@@ -916,22 +880,37 @@ def evaluate_models(
                 ) * 100,
 
             "Test Accuracy (%)":
-                test_acc,
+                accuracy_score(
+                    y_test,
+                    test_pred,
+                ) * 100,
 
             "Precision (%)":
-                prec,
+                precision_score(
+                    y_test,
+                    test_pred,
+                    zero_division=0,
+                ) * 100,
 
             "Recall (%)":
-                rec,
+                recall_score(
+                    y_test,
+                    test_pred,
+                    zero_division=0,
+                ) * 100,
 
             "F1-score (%)":
-                f1,
+                f1_score(
+                    y_test,
+                    test_pred,
+                    zero_division=0,
+                ) * 100,
 
             "AUC (%)":
-                auc,
-
-            "Average Score (%)":
-                avg_score,
+                roc_auc_score(
+                    y_test,
+                    test_proba,
+                ) * 100,
         })
 
         fpr, tpr, _ = roc_curve(
@@ -1307,7 +1286,7 @@ tab_overview, tab_eda, tab_model, tab_predict = st.tabs(
         "Overview",
         "Data Exploratory",
         "Model Performance",
-        "Predict",
+        "Prediction",
     ],
     default=(
         "Model Performance"
@@ -3117,3 +3096,4 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
