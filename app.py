@@ -1276,12 +1276,13 @@ metric_options = [
     "AUC (%)",
 ]
 
-tab_overview, tab_eda, tab_model, tab_predict = st.tabs(
+tab_overview, tab_eda, tab_model, tab_predict, tab_about = st.tabs(
     [
         "Overview",
         "Data Exploratory",
         "Model Performance",
         "Prediction",
+        "About",
     ],
     default=(
         "Model Performance"
@@ -3091,3 +3092,57 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
+
+# ==========================================================================
+# ABOUT
+# ==========================================================================
+
+with tab_about:
+
+    st.subheader("ℹ️ Telco Customer Churn Prediction")
+
+    st.markdown("""
+    **Purpose:**  
+    Analyse customer churn and identify customers who are likely to leave.
+
+    **Dataset:**  
+    7,043 customer records and 21 attributes.
+
+    **Data Analysis:**  
+    Explore customer characteristics, contracts, charges, services, and churn patterns.
+
+    **Data Preparation:**  
+    * Data cleaning  
+    * Missing-value handling  
+    * Categorical encoding  
+    * Outlier detection  
+    * Data partitioning  
+    * Feature scaling  
+
+    **Machine Learning Models:**  
+    1. Logistic Regression  
+    2. Random Forest  
+    3. Support Vector Machine (SVM)  
+
+    **Model Evaluation:**  
+    * **Accuracy** - Measures the proportion of customers that the model correctly classifies as churn or non-churn.  
+    * **Precision** - Measures how many customers predicted to churn actually churned.  
+    * **Recall** - Measures how many actual churn customers were correctly identified by the model.  
+    * **F1-score** - Measures the balance between Precision and Recall, especially useful when the dataset has class imbalance.  
+    * **Area Under Graph (AUC)** - Measures how well the model distinguishes between churn and non-churn customers across different classification thresholds.  
+
+    **Best Model: Random Forest**  
+    * Training Accuracy: 84.35%  
+    * Test Accuracy: 80.55%  
+    * Precision: 67.12%  
+    * Recall: 52.41%  
+    * F1-score: 58.86%  
+    * AUC: 84.38%  
+
+    **Key Finding:**  
+    Churn is particularly associated with shorter tenure and month-to-month contracts.  
+
+    **Business Purpose:**  
+    Help the telecommunications company identify high-risk customers early and take proactive retention actions.
+    """)
