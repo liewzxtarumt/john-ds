@@ -1286,7 +1286,7 @@ tab_overview, tab_eda, tab_model, tab_predict = st.tabs(
         "Overview",
         "Data Exploratory",
         "Model Performance",
-        "Predict",
+        "Prediction",
     ],
     default=(
         "Model Performance"
