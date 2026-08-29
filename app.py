@@ -132,25 +132,27 @@ h1, h2, h3 {
 .sidebar-best-model {
     background: #e2f5eb;
     border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 12px;
-    margin-bottom: 20px;
+    padding: 10px 10px 9px 10px;
+    margin-top: 8px;
+    margin-bottom: 12px;
     color: #087443;
 }
 
 .sidebar-best-model-title {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 600;
+    line-height: 1.35;
     margin-bottom: 8px;
 }
 
 .sidebar-best-model-score {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
+    line-height: 1.35;
 }
 
 .sidebar-brand {
-    padding: 4px 4px 16px 4px;
+    padding: 4px 4px 8px 4px;
     margin-bottom: 12px;
 }
 
@@ -170,10 +172,25 @@ h1, h2, h3 {
 }
 
 .sidebar-auto-loaded {
-    font-size: 13px;
-    color: #6B7280;
-    margin-top: 6px;
-    padding-left: 2px;
+    background: #e2f5eb;
+    border-radius: 10px;
+    padding: 10px 10px 9px 10px;
+    margin-top: 10px;
+    color: #087443;
+}
+
+.sidebar-auto-loaded-title {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 7px;
+}
+
+.sidebar-auto-loaded-file {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+    padding-left: 21px;
 }
 
 
@@ -1019,7 +1036,16 @@ if local_path is not None:
 
             data_source = local_path
             st.markdown(
-                "<div class=\"sidebar-auto-loaded\">auto-loaded</div>",
+                """
+                <div class="sidebar-auto-loaded">
+                    <div class="sidebar-auto-loaded-title">
+                        📁 Auto-loaded
+                    </div>
+                    <div class="sidebar-auto-loaded-file">
+                        Telco_Cusomer_Churn.csv
+                    </div>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
 
@@ -1185,7 +1211,7 @@ sidebar_best_model.markdown(
     f"""
     <div class="sidebar-best-model">
         <div class="sidebar-best-model-title">
-            Best Model: {best_row['Model']}
+            🏆 Best Model: {best_row['Model']}
         </div>
         <div class="sidebar-best-model-score">
             Test Accuracy: {best_row['Test Accuracy (%)']:.2f}%
