@@ -91,35 +91,31 @@ h1, h2, h3 {
 
 
 /* ----------------------------------------------------------------------
-   Top navigation tabs
-   ---------------------------------------------------------------------- */
+   Top navigation
+---------------------------------------------------------------------- */
 
-.stTabs [data-baseweb="tab-list"] {
-    gap: 24px;
+.top-navigation {
+    display: flex;
+    align-items: center;
+    gap: 30px;
     border-bottom: 1px solid #dddddd;
+    margin-top: 10px;
+    margin-bottom: 28px;
+    padding-left: 2px;
 }
 
-.stTabs [data-baseweb="tab"] {
-    background-color: transparent !important;
-    border-radius: 0 !important;
-    padding: 10px 0 12px 0 !important;
-    color: #333333 !important;
+.top-navigation-item {
+    padding: 10px 0 12px 0;
     font-size: 16px;
+    color: #333333;
     white-space: nowrap;
 }
 
-.stTabs [data-baseweb="tab"] p {
-    color: inherit !important;
+.top-navigation-item.active {
+    color: #e45757;
+    border-bottom: 2px solid #e45757;
 }
 
-.stTabs [data-baseweb="tab"][aria-selected="true"] {
-    color: #e45757 !important;
-}
-
-.stTabs [data-baseweb="tab-highlight"] {
-    background-color: #e45757 !important;
-    height: 2px !important;
-}
 
 /* ----------------------------------------------------------------------
    Sidebar
@@ -151,12 +147,57 @@ h1, h2, h3 {
 
 
 /* ----------------------------------------------------------------------
+   Tabs / select boxes
+---------------------------------------------------------------------- */
+
+.stTabs [data-baseweb="tab-list"] {
+    gap: 6px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: #1f2937;
+    border-radius: 10px 10px 0 0;
+    padding: 8px 16px;
+}
+
+
+/* ----------------------------------------------------------------------
    Section selector
 ---------------------------------------------------------------------- */
 
 .analysis-selector {
     margin-top: 8px;
     margin-bottom: 22px;
+}
+
+
+/* ----------------------------------------------------------------------
+   Hide radio circles for the top navigation
+---------------------------------------------------------------------- */
+
+.top-nav-radio [role="radiogroup"] {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #dddddd;
+    width: 100%;
+}
+
+.top-nav-radio [role="radio"] {
+    border-radius: 0 !important;
+    padding: 10px 0 12px 0 !important;
+    margin-right: 28px !important;
+    color: #333333 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.top-nav-radio [role="radio"][aria-checked="true"] {
+    color: #e45757 !important;
+    border-bottom: 2px solid #e45757 !important;
+}
+
+.top-nav-radio [role="radio"] > div:first-child {
+    display: none !important;
 }
 
 
@@ -1138,22 +1179,39 @@ st.sidebar.markdown(
 
 
 # ==========================================================================
-# TOP NAVIGATION — UNDERLINE TABS
+# TOP NAVIGATION
 # ==========================================================================
 
-tab_overview, tab_eda, tab_model, tab_predict = st.tabs([
+page_options = [
     "Overview",
     "Exploratory Data Analysis",
     "Modelling & Evaluation",
     "Predict a Customer",
-])
+]
+
+if "selected_page" not in st.session_state:
+    st.session_state.selected_page = "Overview"
+
+
+selected_page = st.radio(
+    "Navigation",
+    page_options,
+    index=page_options.index(
+        st.session_state.selected_page
+    ),
+    horizontal=True,
+    label_visibility="collapsed",
+    key="top_navigation",
+)
+
+page = selected_page
 
 
 # ==========================================================================
 # OVERVIEW
 # ==========================================================================
 
-with tab_overview:
+if page == "Overview":
 
     st.subheader(
         "Overview Summary"
@@ -1247,7 +1305,7 @@ with tab_overview:
 # EXPLORATORY DATA ANALYSIS
 # ==========================================================================
 
-with tab_eda:
+elif page == "Exploratory Data Analysis":
 
     st.markdown(
         '<div class="major-heading">'
@@ -2196,7 +2254,7 @@ with tab_eda:
 # MODELLING & EVALUATION
 # ==========================================================================
 
-with tab_model:
+elif page == "Modelling & Evaluation":
 
     st.subheader(
         "🤖 Modelling & Evaluation"
@@ -2703,7 +2761,7 @@ with tab_model:
 # PREDICT A CUSTOMER
 # ==========================================================================
 
-with tab_predict:
+elif page == "Predict a Customer":
 
     st.subheader(
         "🔮 Predict Churn for a Customer"
@@ -3003,3 +3061,4 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
