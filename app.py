@@ -1513,14 +1513,14 @@ with tab_eda:
     )
 
     preparation_tabs = st.tabs([
-        "Missing Value",
-        "Chi-Square Test",
+        "Missing value",
+        "Chi-square",
         "Encoding",
         "IQR",
         "Boxplot",
         "Stratified Train/Test Split",
         "Distribution",
-        "Feature Scaling",
+        "Features Scaling",
     ])
 
 
