@@ -89,38 +89,6 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
-/* Underline-style navigation tabs */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 0;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.stTabs [data-baseweb="tab"] {
-    background-color: transparent;
-    border-radius: 0;
-    padding: 10px 18px 11px 18px;
-    color: #374151;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-    color: #ef5350;
-}
-
-.stTabs [data-baseweb="tab"][aria-selected="true"] {
-    color: #ef5350 !important;
-}
-
-.stTabs [data-baseweb="tab-highlight"] {
-    background-color: #ef5350;
-    height: 2px;
-}
-
-.stTabs [data-baseweb="tab-panel"] {
-    padding-top: 1.2rem;
-}
-
 
 /* ----------------------------------------------------------------------
    Top navigation tabs
@@ -1309,11 +1277,11 @@ with tab_eda:
         "Correlation Matrix",
     ]
 
-    understanding_tabs = st.tabs([
-        "Distribution of Customer Churn",
-        "Customer Churn Rate by Contract Type",
-        "Correlation Matrix",
-    ])
+    understanding_choice = st.selectbox(
+        "Select Analysis",
+        understanding_options,
+        key="understanding_selector",
+    )
 
 
     # ----------------------------------------------------------------------
@@ -1581,16 +1549,11 @@ with tab_eda:
         "Feature Scaling",
     ]
 
-    preparation_tabs = st.tabs([
-        "Missing Value",
-        "Chi-Square Test",
-        "Encoding",
-        "IQR",
-        "Boxplot",
-        "Stratified Train/Test Split",
-        "Distribution",
-        "Feature Scaling",
-    ])
+    preparation_choice = st.selectbox(
+        "Select Analysis",
+        preparation_options,
+        key="preparation_selector",
+    )
 
 
     # ======================================================================
@@ -3040,3 +3003,5 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
+
