@@ -1,5 +1,5 @@
 """
-Telco Customer Churn — Interactive Dashboard
+Telcom Customer Churn — Interactive Dashboard
 ==============================================
 
 Run:
@@ -42,7 +42,7 @@ from sklearn.svm import SVC
 # ==========================================================================
 
 st.set_page_config(
-    page_title="Telco Customer Churn Dashboard",
+    page_title="Telcom Customer Churn Dashboard",
     page_icon="📉",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -1022,11 +1022,11 @@ def chi_square_table(
 # ==========================================================================
 
 st.title(
-    "📉 Telco Customer Churn Dashboard"
+    "📉 Telcom Customer Churn Dashboard"
 )
 
 st.caption(
-    "Telco Customer Churn analysis and prediction dashboard."
+    "Telcom Customer Churn analysis and prediction dashboard."
 )
 
 
