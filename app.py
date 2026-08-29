@@ -1513,14 +1513,14 @@ with tab_eda:
     )
 
     preparation_tabs = st.tabs([
-        "Missing value",
-        "Chi-square",
+        "Missing Value",
+        "Chi-Square Test",
         "Encoding",
         "IQR",
         "Boxplot",
         "Stratified Train/Test Split",
         "Distribution",
-        "Features Scaling",
+        "Feature Scaling",
     ])
 
 
@@ -2205,37 +2205,41 @@ with tab_model:
         "Metric Comparison"
     )
 
-    metric = st.selectbox(
-        "Metric",
-        [
-            "Training Accuracy (%)",
-            "Test Accuracy (%)",
-            "Precision (%)",
-            "Recall (%)",
-            "F1-score (%)",
-            "AUC (%)",
-        ],
-    )
+    metric_options = [
+        "Training Accuracy (%)",
+        "Test Accuracy (%)",
+        "Precision (%)",
+        "Recall (%)",
+        "F1-score (%)",
+        "AUC (%)",
+    ]
 
-    fig = px.bar(
-        results_df,
-        x="Model",
-        y=metric,
-        color="Model",
-        text_auto=".2f",
-        color_discrete_sequence=PALETTE,
-        title=f"{metric} by Model",
-        range_y=[0, 100],
-    )
+    metric_tabs = st.tabs(metric_options)
 
-    fig.update_layout(
-        showlegend=False
-    )
+    for metric_tab, metric in zip(
+        metric_tabs,
+        metric_options,
+    ):
+        with metric_tab:
+            fig = px.bar(
+                results_df,
+                x="Model",
+                y=metric,
+                color="Model",
+                text_auto=".2f",
+                color_discrete_sequence=PALETTE,
+                title=f"{metric} by Model",
+                range_y=[0, 100],
+            )
 
-    st.plotly_chart(
-        fig,
-        use_container_width=True,
-    )
+            fig.update_layout(
+                showlegend=False
+            )
+
+            st.plotly_chart(
+                fig,
+                use_container_width=True,
+            )
 
     st.subheader(
         "Training vs Test Accuracy"
