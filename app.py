@@ -378,8 +378,6 @@ def is_text_col(s: pd.Series) -> bool:
 # --------------------------------------------------------------------------
 
 def make_missing_values_figure(raw_df: pd.DataFrame):
-    # Missing-value pattern after converting TotalCharges to numeric.
-    # Display only variables with missing values as a bar chart.
     missing_counts = raw_df.isna().sum()
     missing_counts = missing_counts[missing_counts > 0].sort_values(ascending=False)
 
@@ -868,41 +866,20 @@ def evaluate_models(
             )[:, 1]
         )
 
-        test_acc = accuracy_score(
-            y_test,
-            test_pred,
-        ) * 100
+        train_acc = round(accuracy_score(y_train, train_pred) * 100, 2)
+        test_acc = round(accuracy_score(y_test, test_pred) * 100, 2)
+        prec = round(precision_score(y_test, test_pred, zero_division=0) * 100, 2)
+        rec = round(recall_score(y_test, test_pred, zero_division=0) * 100, 2)
+        f1 = round(f1_score(y_test, test_pred, zero_division=0) * 100, 2)
+        auc = round(roc_auc_score(y_test, test_proba) * 100, 2)
 
-        prec = precision_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        rec = recall_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        f1 = f1_score(
-            y_test,
-            test_pred,
-            zero_division=0,
-        ) * 100
-
-        auc = roc_auc_score(
-            y_test,
-            test_proba,
-        ) * 100
-
-        avg_score = np.mean([
+        avg_score = round(np.mean([
             test_acc,
             prec,
             rec,
             f1,
             auc,
-        ])
+        ]), 2)
 
         rows.append({
 
@@ -910,10 +887,7 @@ def evaluate_models(
                 name,
 
             "Training Accuracy (%)":
-                accuracy_score(
-                    y_train,
-                    train_pred,
-                ) * 100,
+                train_acc,
 
             "Test Accuracy (%)":
                 test_acc,
@@ -1307,7 +1281,7 @@ tab_overview, tab_eda, tab_model, tab_predict = st.tabs(
         "Overview",
         "Data Exploratory",
         "Model Performance",
-        "Predict",
+        "Prediction",
     ],
     default=(
         "Model Performance"
@@ -2814,7 +2788,7 @@ with tab_model:
 
 
 # ==========================================================================
-# PREDICT A CUSTOMER
+# PREDICTION
 # ==========================================================================
 
 with tab_predict:
@@ -3117,4 +3091,3 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
-
