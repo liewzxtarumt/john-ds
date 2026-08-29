@@ -2205,41 +2205,37 @@ with tab_model:
         "Metric Comparison"
     )
 
-    metric_options = [
-        "Training Accuracy (%)",
-        "Test Accuracy (%)",
-        "Precision (%)",
-        "Recall (%)",
-        "F1-score (%)",
-        "AUC (%)",
-    ]
+    metric = st.selectbox(
+        "Metric",
+        [
+            "Training Accuracy (%)",
+            "Test Accuracy (%)",
+            "Precision (%)",
+            "Recall (%)",
+            "F1-score (%)",
+            "AUC (%)",
+        ],
+    )
 
-    metric_tabs = st.tabs(metric_options)
+    fig = px.bar(
+        results_df,
+        x="Model",
+        y=metric,
+        color="Model",
+        text_auto=".2f",
+        color_discrete_sequence=PALETTE,
+        title=f"{metric} by Model",
+        range_y=[0, 100],
+    )
 
-    for metric_tab, metric in zip(
-        metric_tabs,
-        metric_options,
-    ):
-        with metric_tab:
-            fig = px.bar(
-                results_df,
-                x="Model",
-                y=metric,
-                color="Model",
-                text_auto=".2f",
-                color_discrete_sequence=PALETTE,
-                title=f"{metric} by Model",
-                range_y=[0, 100],
-            )
+    fig.update_layout(
+        showlegend=False
+    )
 
-            fig.update_layout(
-                showlegend=False
-            )
-
-            st.plotly_chart(
-                fig,
-                use_container_width=True,
-            )
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+    )
 
     st.subheader(
         "Training vs Test Accuracy"
