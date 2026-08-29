@@ -42,7 +42,7 @@ from sklearn.svm import SVC
 # ==========================================================================
 
 st.set_page_config(
-    page_title="Telco Customer Churn Dashboard",
+    page_title="Telcom Customer Churn Dashboard",
     page_icon="📉",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -916,7 +916,7 @@ st.title(
 )
 
 st.caption(
-    "Telco Customer Churn analysis and prediction dashboard."
+    "Telcom Customer Churn analysis and prediction dashboard."
 )
 
 
