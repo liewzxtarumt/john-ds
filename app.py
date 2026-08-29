@@ -175,13 +175,26 @@ h1, h2, h3 {
     text-align: left;
 }
 
-.sidebar-best-model-score {
+.sidebar-best-model-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 22px;
+}
+
+.sidebar-metric-link {
     font-size: 13px;
     font-weight: 500;
     line-height: 1.4;
     margin: 0;
-    padding-left: 22px;
+    padding: 0;
     text-align: left;
+    color: #087443 !important;
+    text-decoration: none !important;
+}
+
+.sidebar-metric-link:hover {
+    text-decoration: underline !important;
 }
 
 .sidebar-auto-loaded {
@@ -1211,14 +1224,38 @@ best_row = results_df.loc[
 # SIDEBAR BEST MODEL
 # ==========================================================================
 
+metric_link_map = {
+    "Training Accuracy (%)": "training_accuracy",
+    "Test Accuracy (%)": "test_accuracy",
+    "Precision (%)": "precision",
+    "Recall (%)": "recall",
+    "F1-score (%)": "f1_score",
+    "AUC (%)": "auc",
+}
+
+metric_query_map = {
+    query_value: metric_label
+    for metric_label, query_value in metric_link_map.items()
+}
+
+sidebar_metrics_html = ""
+
+for metric_label, query_value in metric_link_map.items():
+    sidebar_metrics_html += (
+        f'<a class="sidebar-metric-link" '
+        f'href="?metric={query_value}" '
+        f'>{metric_label.replace(" (%)", "")}: '
+        f'{best_row[metric_label]:.2f}%</a>'
+    )
+
 sidebar_best_model.markdown(
     f"""
     <div class="sidebar-best-model">
         <div class="sidebar-best-model-title">
             🏆 Best Model: {best_row['Model']}
         </div>
-        <div class="sidebar-best-model-score">
-            Test Accuracy: {best_row['Test Accuracy (%)']:.2f}%
+        <div class="sidebar-best-model-metrics">
+            {sidebar_metrics_html}
         </div>
     </div>
     """,
@@ -1230,12 +1267,33 @@ sidebar_best_model.markdown(
 # TOP NAVIGATION — UNDERLINE TABS
 # ==========================================================================
 
-tab_overview, tab_eda, tab_model, tab_predict = st.tabs([
-    "Overview",
-    "Data Exploratory",
-    "Model Performance",
-    "Predict",
-])
+requested_metric = st.query_params.get("metric", "")
+valid_metric = metric_query_map.get(
+    requested_metric
+)
+
+metric_options = [
+    "Training Accuracy (%)",
+    "Test Accuracy (%)",
+    "Precision (%)",
+    "Recall (%)",
+    "F1-score (%)",
+    "AUC (%)",
+]
+
+tab_overview, tab_eda, tab_model, tab_predict = st.tabs(
+    [
+        "Overview",
+        "Data Exploratory",
+        "Model Performance",
+        "Predict",
+    ],
+    default=(
+        "Model Performance"
+        if valid_metric
+        else "Overview"
+    ),
+)
 
 
 # ==========================================================================
@@ -2294,16 +2352,14 @@ with tab_model:
         "Metric Comparison"
     )
 
-    metric_options = [
-        "Training Accuracy (%)",
-        "Test Accuracy (%)",
-        "Precision (%)",
-        "Recall (%)",
-        "F1-score (%)",
-        "AUC (%)",
-    ]
-
-    metric_tabs = st.tabs(metric_options)
+    metric_tabs = st.tabs(
+        metric_options,
+        default=(
+            valid_metric
+            if valid_metric
+            else metric_options[0]
+        ),
+    )
 
     for metric_tab, metric in zip(
         metric_tabs,
