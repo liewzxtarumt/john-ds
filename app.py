@@ -3146,12 +3146,12 @@ with tab_about:
 
     st.divider()
 
-   # 4. Pipeline & Technical Details
+  # 4. Pipeline & Technical Details
     st.markdown("### 🛠️ Technical Pipeline & Methodology")
 
-    col_left, col_right = st.columns([1, 1], gap="medium")
+    col_top_left, col_top_right = st.columns([1, 1])
 
-    with col_left:
+    with col_top_left:
         st.markdown("#### Data Preparation")
         st.markdown(
             """
@@ -3164,31 +3164,47 @@ with tab_about:
             """
         )
 
-        st.divider()
-
+    with col_top_right:
         st.markdown("#### Evaluation Metrics")
         st.markdown(
             """
-            * **Accuracy:** Measures the proportion of customers that the model correctly classifies as churn or non-churn
-            * **Precision:** Measures how many customers predicted to churn actually churned
-            * **Recall:** Measures how many actual churn customers were correctly identified by the model
-            * **F1-score:** Measures the balance between Precision and Recall, especially useful when the dataset has class imbalance
-            * **AUC:** Measures how well the model distinguishes between churn and non-churn customers across different classification thresholds
+            * **Accuracy:** Overall correct predictions ratio
+            * **Precision:** True churners out of predicted churns
+            * **Recall:** True churners successfully captured
+            * **F1-score:** Balance between Precision & Recall
+            * **AUC:** Multi-threshold separation power
             """
         )
 
-    with col_right:
-        with st.container(border=True):
-            st.markdown("#### Machine Learning Models")
-            st.markdown(
-                """
-                * **Logistic Regression**  
-                  *(Linear baseline model)*
-                
-                * **Random Forest**  
-                  *(Best performing ensemble model)*
-                
-                * **Support Vector Machine (SVM)**  
-                  *(Non-linear kernel classification)*
-                """
-            )
+    st.divider()
+
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+            border: 1px solid #b3d4fc;
+            border-left: 5px solid #1e88e5;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
+        ">
+            <h4 style="color: #0d47a1; margin-top: 0; margin-bottom: 12px;">🤖 Machine Learning Models</h4>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #1565c0;">1. Logistic Regression</strong><br>
+                    <span style="font-size: 0.88em; color: #5c6bc0;">Linear baseline model</span>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #2e7d32;">2. Random Forest ⭐</strong><br>
+                    <span style="font-size: 0.88em; color: #2e7d32; font-weight: 500;">Best performing ensemble model</span>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <strong style="color: #1565c0;">3. Support Vector Machine</strong><br>
+                    <span style="font-size: 0.88em; color: #5c6bc0;">Non-linear kernel classification</span>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
