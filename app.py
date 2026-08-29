@@ -1268,30 +1268,18 @@ with tab_eda:
         unsafe_allow_html=True,
     )
 
-    understanding_options = [
-
+    understanding_tabs = st.tabs([
         "Distribution of Customer Churn",
-
         "Customer Churn Rate by Contract Type",
-
         "Correlation Matrix",
-    ]
-
-    understanding_choice = st.selectbox(
-        "Select Analysis",
-        understanding_options,
-        key="understanding_selector",
-    )
+    ])
 
 
     # ----------------------------------------------------------------------
     # Distribution of Customer Churn
     # ----------------------------------------------------------------------
 
-    if (
-        understanding_choice
-        == "Distribution of Customer Churn"
-    ):
+    with understanding_tabs[0]:
 
         st.subheader(
             "Distribution of Customer Churn"
@@ -1329,10 +1317,7 @@ with tab_eda:
     # Customer Churn Rate by Contract Type
     # ----------------------------------------------------------------------
 
-    elif (
-        understanding_choice
-        == "Customer Churn Rate by Contract Type"
-    ):
+    with understanding_tabs[1]:
 
         st.subheader(
             "Customer Churn Rate by Contract Type"
@@ -1469,10 +1454,7 @@ with tab_eda:
     # Correlation Matrix
     # ----------------------------------------------------------------------
 
-    elif (
-        understanding_choice
-        == "Correlation Matrix"
-    ):
+    with understanding_tabs[2]:
 
         st.subheader(
             "Correlation Matrix of Numerical Variables"
@@ -1530,40 +1512,23 @@ with tab_eda:
         "Select a data preparation step below."
     )
 
-    preparation_options = [
-
+    preparation_tabs = st.tabs([
         "Missing Value",
-
         "Chi-Square Test",
-
         "Encoding",
-
         "IQR",
-
         "Boxplot",
-
         "Stratified Train/Test Split",
-
         "Distribution",
-
         "Feature Scaling",
-    ]
-
-    preparation_choice = st.selectbox(
-        "Select Analysis",
-        preparation_options,
-        key="preparation_selector",
-    )
+    ])
 
 
     # ======================================================================
     # MISSING VALUE
     # ======================================================================
 
-    if (
-        preparation_choice
-        == "Missing Value"
-    ):
+    with preparation_tabs[0]:
 
         st.subheader(
             "Missing Value"
@@ -1640,10 +1605,7 @@ with tab_eda:
     # CHI-SQUARE TEST
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Chi-Square Test"
-    ):
+    with preparation_tabs[1]:
 
         st.subheader(
             "Chi-Square Test"
@@ -1739,10 +1701,7 @@ with tab_eda:
     # ENCODING
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Encoding"
-    ):
+    with preparation_tabs[2]:
 
         st.subheader(
             "Encoding"
@@ -1790,10 +1749,7 @@ with tab_eda:
     # IQR
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "IQR"
-    ):
+    with preparation_tabs[3]:
 
         st.subheader(
             "IQR"
@@ -1889,10 +1845,7 @@ with tab_eda:
     # BOXPLOT
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Boxplot"
-    ):
+    with preparation_tabs[4]:
 
         st.subheader(
             "Boxplot"
@@ -1929,10 +1882,7 @@ with tab_eda:
     # STRATIFIED TRAIN / TEST SPLIT
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Stratified Train/Test Split"
-    ):
+    with preparation_tabs[5]:
 
         st.subheader(
             "Stratified Train/Test Split (80% / 20%)"
@@ -2024,10 +1974,7 @@ with tab_eda:
     # DISTRIBUTION
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Distribution"
-    ):
+    with preparation_tabs[6]:
 
         st.subheader(
             "Distribution of Numerical Variables"
@@ -2121,10 +2068,7 @@ with tab_eda:
     # FEATURE SCALING
     # ======================================================================
 
-    elif (
-        preparation_choice
-        == "Feature Scaling"
-    ):
+    with preparation_tabs[7]:
 
         st.subheader(
             "Feature Scaling — StandardScaler"
@@ -3003,3 +2947,4 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
