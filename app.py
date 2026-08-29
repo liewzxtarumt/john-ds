@@ -42,7 +42,7 @@ from sklearn.svm import SVC
 # ==========================================================================
 
 st.set_page_config(
-    page_title="Telcom Customer Churn Dashboard",
+    page_title="Telco Customer Churn Dashboard",
     page_icon="📉",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -912,11 +912,11 @@ def chi_square_table(
 # ==========================================================================
 
 st.title(
-    "📉 Telcom Customer Churn Dashboard"
+    "📉 Telco Customer Churn Dashboard"
 )
 
 st.caption(
-    "Telcom Customer Churn analysis and prediction dashboard."
+    "Telco Customer Churn analysis and prediction dashboard."
 )
 
 
