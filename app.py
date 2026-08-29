@@ -366,40 +366,38 @@ def is_text_col(s: pd.Series) -> bool:
 
 def make_missing_values_figure(raw_df: pd.DataFrame):
     # Missing-value pattern after converting TotalCharges to numeric.
-    # 0 = not missing, 1 = missing.
-    missing_pattern = raw_df.isna().astype(int)
+    # Display only variables with missing values as a bar chart.
+    missing_counts = raw_df.isna().sum()
+    missing_counts = missing_counts[missing_counts > 0].sort_values(ascending=False)
 
-    fig = px.imshow(
-        missing_pattern,
-        aspect="auto",
-        color_continuous_scale="Viridis",
-        origin="upper",
+    plot_df = missing_counts.rename("Missing Values").reset_index()
+    plot_df.columns = ["Variable", "Missing Values"]
+
+    fig = px.bar(
+        plot_df,
+        x="Variable",
+        y="Missing Values",
+        text="Missing Values",
+        title="Missing Values Identified After Data Type Conversion",
         labels={
-            "x": "Variables",
-            "y": "Customer Records",
-            "color": "Missing",
+            "Variable": "Variable",
+            "Missing Values": "Number of Missing Values",
         },
-        title="Missing Value Pattern After Data Type Conversion",
+    )
+
+    fig.update_traces(
+        textposition="outside",
     )
 
     fig.update_layout(
         height=450,
-        coloraxis_showscale=False,
+        showlegend=False,
         margin=dict(
             l=70,
             r=30,
             t=60,
-            b=110,
+            b=70,
         ),
-    )
-
-    fig.update_xaxes(
-        tickangle=-90,
-        side="bottom",
-    )
-
-    fig.update_yaxes(
-        autorange="reversed",
     )
 
     return fig
