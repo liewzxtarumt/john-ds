@@ -3208,3 +3208,47 @@ with tab_about:
         """,
         unsafe_allow_html=True
     )
+
+# 在 tab_about 最底部加入 All-English Footer
+    st.markdown("---")
+    
+    st.markdown(
+        """
+        <div style="
+            padding: 20px 0 10px 0;
+            font-family: sans-serif;
+            border-top: 1px solid #e0e0e0;
+        ">
+            <!-- Top Links Line -->
+            <div style="
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-bottom: 15px;
+            ">
+                <div style="font-size: 0.85rem; font-weight: 600; color: #555;">
+                    <span style="margin-right: 15px;">TERMS & CONDITIONS</span>
+                    <span style="margin-right: 15px;">PRIVACY POLICY</span>
+                    <span>PERSONAL DATA PROTECTION NOTICE</span>
+                </div>
+                <div style="font-size: 0.85rem; color: #777;">
+                    <span style="margin-right: 15px;">Company Info</span>
+                    <span style="margin-right: 15px;">Careers</span>
+                    <span>Contact Us</span>
+                </div>
+            </div>
+            
+            <!-- Copyright Line -->
+            <div style="
+                font-size: 0.78rem; 
+                color: #888; 
+                letter-spacing: 0.5px;
+            ">
+                COPYRIGHT © 2026 LT TELECOMMUNICATIONS SERVICE SDN. BHD. (LTTS). ALL RIGHTS RESERVED.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
