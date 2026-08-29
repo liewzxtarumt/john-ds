@@ -132,65 +132,21 @@ h1, h2, h3 {
 .sidebar-best-model {
     background: #e2f5eb;
     border-radius: 10px;
-    padding: 10px 10px 9px 10px;
-    margin-top: 8px;
-    margin-bottom: 12px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    margin-bottom: 20px;
     color: #087443;
 }
 
 .sidebar-best-model-title {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
-    line-height: 1.35;
     margin-bottom: 8px;
 }
 
 .sidebar-best-model-score {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.35;
-}
-
-.sidebar-brand {
-    padding: 4px 4px 8px 4px;
-    margin-bottom: 12px;
-}
-
-.sidebar-company {
-    font-size: 15px;
-    font-weight: 700;
-    color: #374151;
-    line-height: 1.35;
-    margin-bottom: 6px;
-}
-
-.sidebar-course {
     font-size: 14px;
     font-weight: 500;
-    color: #6B7280;
-    line-height: 1.35;
-}
-
-.sidebar-auto-loaded {
-    background: #e2f5eb;
-    border-radius: 10px;
-    padding: 10px 10px 9px 10px;
-    margin-top: 10px;
-    color: #087443;
-}
-
-.sidebar-auto-loaded-title {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.35;
-    margin-bottom: 7px;
-}
-
-.sidebar-auto-loaded-file {
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.35;
-    padding-left: 21px;
 }
 
 
@@ -226,29 +182,6 @@ h1, h2, h3 {
 """
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
-
-
-# ==========================================================================
-# SIDEBAR LAYOUT PLACEHOLDERS
-# ==========================================================================
-
-sidebar_brand = st.sidebar.empty()
-sidebar_best_model = st.sidebar.empty()
-sidebar_file = st.sidebar.empty()
-
-sidebar_brand.markdown(
-    """
-    <div class="sidebar-brand">
-        <div class="sidebar-company">
-            LT Telecommunications Service Sdn. Bhd. (LTTS)
-        </div>
-        <div class="sidebar-course">
-            BMDS2003 Data Science
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 
 # ==========================================================================
@@ -347,41 +280,27 @@ def is_text_col(s: pd.Series) -> bool:
 # --------------------------------------------------------------------------
 
 def make_missing_values_figure(raw_df: pd.DataFrame):
-    # Missing-value pattern after converting TotalCharges to numeric.
-    # 0 = not missing, 1 = missing.
-    missing_pattern = raw_df.isna().astype(int)
+    missing = raw_df.isna().sum().sort_values(ascending=False)
+    missing = missing[missing > 0]
 
-    fig = px.imshow(
-        missing_pattern,
-        aspect="auto",
-        color_continuous_scale="Viridis",
-        origin="upper",
+    if missing.empty:
+        missing = pd.Series({"TotalCharges": 0})
+
+    fig = px.bar(
+        x=missing.index,
+        y=missing.values,
+        text=missing.values,
+        title="Missing Values Identified in TotalCharges",
         labels={
-            "x": "Variables",
-            "y": "Customer Records",
-            "color": "Missing",
+            "x": "Variable",
+            "y": "Number of Missing Values",
         },
-        title="Missing Value Pattern After Data Type Conversion",
     )
 
+    fig.update_traces(textposition="outside")
     fig.update_layout(
-        height=450,
-        coloraxis_showscale=False,
-        margin=dict(
-            l=70,
-            r=30,
-            t=60,
-            b=110,
-        ),
-    )
-
-    fig.update_xaxes(
-        tickangle=-90,
-        side="bottom",
-    )
-
-    fig.update_yaxes(
-        autorange="reversed",
+        showlegend=False,
+        height=400,
     )
 
     return fig
@@ -1019,49 +938,42 @@ data_source = None
 
 if local_path is not None:
 
-    with sidebar_file.container():
+    st.sidebar.success(
+        f"📂 Auto-loaded `{local_path}`"
+    )
 
-        use_other_file = st.checkbox(
-            "use a different file instead"
+    use_other_file = (
+        st.sidebar.checkbox(
+            "Use a different file instead"
         )
+    )
 
-        if use_other_file:
+    if use_other_file:
 
-            data_source = st.file_uploader(
+        data_source = (
+            st.sidebar.file_uploader(
                 "Upload a churn CSV",
                 type=["csv"],
             )
+        )
 
-        else:
+    else:
 
-            data_source = local_path
-            st.markdown(
-                """
-                <div class="sidebar-auto-loaded">
-                    <div class="sidebar-auto-loaded-title">
-                        📁 Auto-loaded
-                    </div>
-                    <div class="sidebar-auto-loaded-file">
-                        Telco_Cusomer_Churn.csv
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        data_source = local_path
 
 
 else:
 
-    with sidebar_file.container():
+    st.sidebar.warning(
+        "No local CSV found next to app.py."
+    )
 
-        st.warning(
-            "No local CSV found next to app.py."
-        )
-
-        data_source = st.file_uploader(
+    data_source = (
+        st.sidebar.file_uploader(
             "Upload Telco_Customer_Churn.csv",
             type=["csv"],
         )
+    )
 
 
 # ==========================================================================
@@ -1207,14 +1119,17 @@ best_row = results_df.loc[
 # SIDEBAR BEST MODEL
 # ==========================================================================
 
-sidebar_best_model.markdown(
+st.sidebar.markdown(
     f"""
     <div class="sidebar-best-model">
         <div class="sidebar-best-model-title">
             🏆 Best Model: {best_row['Model']}
         </div>
         <div class="sidebar-best-model-score">
-            Test Accuracy: {best_row['Test Accuracy (%)']:.2f}%
+            Test Accuracy:
+            <strong>
+                {best_row['Test Accuracy (%)']:.2f}%
+            </strong>
         </div>
     </div>
     """,
@@ -3036,3 +2951,5 @@ with tab_predict:
             use_container_width=True,
             hide_index=True,
         )
+
+
