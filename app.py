@@ -912,7 +912,7 @@ def chi_square_table(
 # ==========================================================================
 
 st.title(
-    "📉 Telco Customer Churn Dashboard"
+    "📉 Telcom Customer Churn Dashboard"
 )
 
 st.caption(
