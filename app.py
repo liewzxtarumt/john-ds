@@ -129,37 +129,24 @@ h1, h2, h3 {
     background-color: #f4f6f9;
 }
 
-.sidebar-best-model {
-    background: #e2f5eb;
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 12px;
-    margin-bottom: 20px;
-    color: #087443;
-}
-
-.sidebar-best-model-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.sidebar-best-model-score {
-    font-size: 14px;
-    font-weight: 500;
+[data-testid="stSidebar"] .block-container {
+    padding-top: 1.35rem;
+    padding-left: 1.05rem;
+    padding-right: 1.05rem;
 }
 
 .sidebar-brand {
-    padding: 4px 4px 16px 4px;
-    margin-bottom: 12px;
+    padding: 0 4px 8px 4px;
+    margin-bottom: 14px;
 }
 
 .sidebar-company {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: #374151;
     line-height: 1.35;
-    margin-bottom: 6px;
+    text-align: left;
+    margin-bottom: 7px;
 }
 
 .sidebar-course {
@@ -167,15 +154,62 @@ h1, h2, h3 {
     font-weight: 500;
     color: #6B7280;
     line-height: 1.35;
+    text-align: left;
+}
+
+.sidebar-best-model {
+    background: #e2f5eb;
+    border-radius: 10px;
+    padding: 12px 13px;
+    margin: 0 0 12px 0;
+    color: #087443;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.sidebar-best-model-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+    text-align: left;
+}
+
+.sidebar-best-model-score {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+    text-align: left;
 }
 
 .sidebar-auto-loaded {
-    font-size: 13px;
-    color: #6B7280;
-    margin-top: 6px;
-    padding-left: 2px;
+    background: #e2f5eb;
+    border-radius: 10px;
+    padding: 12px 13px;
+    margin: 14px 0 0 0;
+    color: #087443;
+    text-align: left;
+    box-sizing: border-box;
 }
 
+.sidebar-auto-loaded-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 7px 0;
+    text-align: left;
+}
+
+.sidebar-auto-loaded-file {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    padding-left: 22px;
+    margin: 0;
+    text-align: left;
+    color: #087443;
+}
 
 /* ----------------------------------------------------------------------
    Section selector
@@ -1002,26 +1036,23 @@ data_source = None
 
 if local_path is not None:
 
+    data_source = local_path
+
     with sidebar_file.container():
 
-        use_other_file = st.checkbox(
-            "use a different file instead"
+        st.markdown(
+            """
+            <div class="sidebar-auto-loaded">
+                <div class="sidebar-auto-loaded-title">
+                    📁 Auto-loaded
+                </div>
+                <div class="sidebar-auto-loaded-file">
+                    Telco_Cusomer_Churn.csv
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
-
-        if use_other_file:
-
-            data_source = st.file_uploader(
-                "Upload a churn CSV",
-                type=["csv"],
-            )
-
-        else:
-
-            data_source = local_path
-            st.markdown(
-                "<div class=\"sidebar-auto-loaded\">auto-loaded</div>",
-                unsafe_allow_html=True,
-            )
 
 
 else:
@@ -1185,7 +1216,7 @@ sidebar_best_model.markdown(
     f"""
     <div class="sidebar-best-model">
         <div class="sidebar-best-model-title">
-            Best Model: {best_row['Model']}
+            🏆 Best Model: {best_row['Model']}
         </div>
         <div class="sidebar-best-model-score">
             Test Accuracy: {best_row['Test Accuracy (%)']:.2f}%
