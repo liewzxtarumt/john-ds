@@ -3169,11 +3169,11 @@ with tab_about:
         st.markdown("#### Evaluation Metrics")
         st.markdown(
             """
-            * **Accuracy:** Overall correct predictions ratio
-            * **Precision:** True churners out of predicted churns
-            * **Recall:** True churners successfully captured
-            * **F1-score:** Balance between Precision & Recall
-            * **AUC:** Multi-threshold separation power
+            * **Accuracy:** Measures the proportion of customers that the model correctly classifies as churn or non-churn
+            * **Precision:** Measures how many customers predicted to churn actually churned
+            * **Recall:** Measures how many actual churn customers were correctly identified by the model
+            * **F1-score:** Measures the balance between Precision and Recall, especially useful when the dataset has class imbalance
+            * **AUC:** Measures how well the model distinguishes between churn and non-churn customers across different classification thresholds
             """
         )
 
